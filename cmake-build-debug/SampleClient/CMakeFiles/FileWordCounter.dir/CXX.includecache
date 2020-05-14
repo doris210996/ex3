@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+..//MapReduceFramework.h
+MapReduceClient.h
+../MapReduceClient.h
+
+../MapReduceClient.h
+vector
+-
+map
+-
+utility
+-
+
+/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/FileWordCounter.cpp
+MapReduceFramework.h
+/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/MapReduceFramework.h
+cstdio
+-
+string.h
+-
+array
+-
+fstream
+-
+unistd.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+bits/stdc++.h
+-
+errno.h
+-
+dirent.h
+-
+map
+-
+

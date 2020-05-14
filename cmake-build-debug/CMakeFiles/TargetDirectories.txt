@@ -1,0 +1,7 @@
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/CMakeFiles/MapReduceFramework.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/CMakeFiles/edit_cache.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/SampleClient/CMakeFiles/rebuild_cache.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/SampleClient/CMakeFiles/SampleClient.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/SampleClient/CMakeFiles/edit_cache.dir
+/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug/SampleClient/CMakeFiles/FileWordCounter.dir

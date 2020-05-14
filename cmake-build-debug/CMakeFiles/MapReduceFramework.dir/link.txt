@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMapReduceFramework.a  CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o CMakeFiles/MapReduceFramework.dir/Barrier.cpp.o CMakeFiles/MapReduceFramework.dir/Barrier/Barrier.cpp.o CMakeFiles/MapReduceFramework.dir/Barrier/barrierdemo.cpp.o CMakeFiles/MapReduceFramework.dir/Atomic/atomicdemo.cpp.o CMakeFiles/MapReduceFramework.dir/Atomic/atomicdemo_multivar.cpp.o
+/usr/bin/ranlib libMapReduceFramework.a

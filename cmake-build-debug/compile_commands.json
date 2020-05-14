@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/MapReduceFramework.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/MapReduceFramework.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/FileWordCounter.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/FileWordCounter.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/Barrier.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/Barrier.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/Barrier/Barrier.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/Barrier.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/Barrier.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/Barrier/barrierdemo.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/barrierdemo.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/barrierdemo.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/Atomic/atomicdemo.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/Atomic/atomicdemo.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/Atomic/atomicdemo.cpp"
+},
+{
+  "directory": "/cs/usr/doronbruder/CLionProjects/os_ex3/cmake-build-debug",
+  "command": "/usr/bin/c++   -I/cs/usr/doronbruder/CLionProjects/os_ex3  -g -fno-omit-frame-pointer -fsanitize=thread   -Wall -Wextra -O2 -pthread -std=gnu++11 -o CMakeFiles/MapReduceFramework.dir/Atomic/atomicdemo_multivar.cpp.o -c /cs/usr/doronbruder/CLionProjects/os_ex3/Atomic/atomicdemo_multivar.cpp",
+  "file": "/cs/usr/doronbruder/CLionProjects/os_ex3/Atomic/atomicdemo_multivar.cpp"
+}
+]

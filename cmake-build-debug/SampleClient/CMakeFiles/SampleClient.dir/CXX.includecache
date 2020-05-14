@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp
+pthread.h
+-
+cstdio
+-
+atomic
+-
+

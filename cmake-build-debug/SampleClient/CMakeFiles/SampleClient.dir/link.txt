@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -fno-omit-frame-pointer -fsanitize=thread  -rdynamic CMakeFiles/SampleClient.dir/SampleClient.cpp.o  -o SampleClient ../libMapReduceFramework.a -pthread 
