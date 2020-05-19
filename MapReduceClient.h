@@ -54,9 +54,10 @@ struct K2PointerComp {
 typedef std::pair<K1*, V1*> InputPair;
 typedef std::pair<K2*, V2*> IntermediatePair;
 typedef std::pair<K3*, V3*> OutputPair;
-
 typedef std::vector<InputPair> InputVec;
 typedef std::map<K2*, std::vector<V2 *>, K2PointerComp> IntermediateMap;
+//typedef std::vector<IntermediatePair> IntermediateVec;
+
 typedef std::vector<OutputPair> OutputVec;
 
 

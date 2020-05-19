@@ -6,11 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp
-pthread.h
+..//MapReduceFramework.h
+MapReduceClient.h
+../MapReduceClient.h
+
+../MapReduceClient.h
+vector
 -
+map
+-
+utility
+-
+
+/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp
+MapReduceFramework.h
+/cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/MapReduceFramework.h
 cstdio
 -
-atomic
+string
+-
+array
+-
+iostream
+-
+unistd.h
 -
 

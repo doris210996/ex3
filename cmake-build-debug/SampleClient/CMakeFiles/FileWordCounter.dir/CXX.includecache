@@ -23,24 +23,12 @@ MapReduceFramework.h
 /cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/MapReduceFramework.h
 cstdio
 -
-string.h
+string
 -
 array
 -
-fstream
+iostream
 -
 unistd.h
--
-sys/types.h
--
-sys/stat.h
--
-bits/stdc++.h
--
-errno.h
--
-dirent.h
--
-map
 -
 

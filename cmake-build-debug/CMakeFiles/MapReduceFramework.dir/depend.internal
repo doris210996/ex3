@@ -15,10 +15,15 @@ CMakeFiles/MapReduceFramework.dir/Barrier/barrierdemo.cpp.o
  /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/Barrier.h
  /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier/barrierdemo.cpp
 CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o
+ /cs/usr/doronbruder/CLionProjects/os_ex3/Barrier.h
+ /cs/usr/doronbruder/CLionProjects/os_ex3/MapReduceClient.h
  /cs/usr/doronbruder/CLionProjects/os_ex3/MapReduceFramework.cpp
+ /cs/usr/doronbruder/CLionProjects/os_ex3/MapReduceFramework.h
 CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o
  ..//MapReduceFramework.h
  ../MapReduceClient.h
  /cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/FileWordCounter.cpp
 CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o
+ ..//MapReduceFramework.h
+ ../MapReduceClient.h
  /cs/usr/doronbruder/CLionProjects/os_ex3/SampleClient/SampleClient.cpp

@@ -14,11 +14,16 @@ CMakeFiles/MapReduceFramework.dir/Barrier/Barrier.cpp.o: ../Barrier/Barrier.h
 CMakeFiles/MapReduceFramework.dir/Barrier/barrierdemo.cpp.o: ../Barrier/Barrier.h
 CMakeFiles/MapReduceFramework.dir/Barrier/barrierdemo.cpp.o: ../Barrier/barrierdemo.cpp
 
+CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o: ../Barrier.h
+CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o: ../MapReduceClient.h
 CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o: ../MapReduceFramework.cpp
+CMakeFiles/MapReduceFramework.dir/MapReduceFramework.cpp.o: ../MapReduceFramework.h
 
 CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o: ../MapReduceFramework.h
 CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o: ../MapReduceClient.h
 CMakeFiles/MapReduceFramework.dir/SampleClient/FileWordCounter.cpp.o: ../SampleClient/FileWordCounter.cpp
 
+CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o: ../MapReduceFramework.h
+CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o: ../MapReduceClient.h
 CMakeFiles/MapReduceFramework.dir/SampleClient/SampleClient.cpp.o: ../SampleClient/SampleClient.cpp
 
