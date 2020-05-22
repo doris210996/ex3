@@ -8,6 +8,7 @@
 typedef std::vector<IntermediatePair> IntermediateVec;
 typedef std::vector<pthread_mutex_t*> mutexVec;
 typedef std::vector<K2*> ReduceKeys;
+typedef std::vector<V2*> mapVec;
 typedef struct jobContext jobContext;
 
 
@@ -31,6 +32,7 @@ typedef struct jobContext{
     std::atomic<unsigned long>* map_sync_counter;
     std::atomic<unsigned long>* reduce_sync_counter;
     std::atomic<unsigned long>* mapping_amount;
+    std::atomic<unsigned long>* reducing_amount;
     IntermediateMap *intermediateMap;
     mutexVec intermediateMutexes;
     pthread_mutex_t *outputMutex;
@@ -80,25 +82,42 @@ void* frameworkShuffle(void *arg)
         //iterate over all the therads
         for (int i = 0; i < job->numOfThreads; i ++)
         {
+
+            mutexLockWithErrors(tc->job->intermediateMutexes.at(i));
             auto curVec = job->allIntermediateVec[i];
+            mutexUnlockWithErrors(tc->job->intermediateMutexes.at(i));
+
+
             //iterate over all the pairs in the current
             //thread intermediate vector and map them
             while (!curVec.empty()){
-                mutexLockWithErrors(tc->job->intermediateMutexes.at(i));
+
                 IntermediatePair pair = curVec.back();
+
+
                 if (map.find(pair.first) == map.end())
                 {
-                    std::vector<V2 *> vec{pair.second};
-                    map.insert({pair.first, vec});
+//                    std::vector<V2 *> vec{pair.second};
+                    mapVec* toAdd = new mapVec;
+                    toAdd->push_back(pair.second);
+                    map.insert({pair.first, *(toAdd)});
+
                 }
                 else
                 {
                     map[pair.first].push_back(pair.second);
+
+
                 }
                 curVec.pop_back();
-                mutexUnlockWithErrors(tc->job->intermediateMutexes.at(i));
+
+
 
             }
+
+
+
+
         }
     }
     for (int i = 0; i < job->numOfThreads; i ++)
@@ -108,8 +127,10 @@ void* frameworkShuffle(void *arg)
             IntermediatePair pair = curVec.back();
             if (map.find(pair.first) == map.end())
             {
-                std::vector<V2 *> vec{pair.second};
-                map.insert({pair.first, vec});
+//                std::vector<V2 *> vec{pair.second};
+                mapVec* toAdd = new mapVec;
+                toAdd->push_back(pair.second);
+                map.insert({pair.first, *toAdd});
             }
             else
             {
@@ -119,40 +140,37 @@ void* frameworkShuffle(void *arg)
         }
     }
 
-//    for(IntermediateMap::iterator it = map.begin(); it != map.end(); ++it)
-//    {
-//        tc->job->reduceKeys->push_back(it->first);
-//    }
+    for(auto & it : map)
+    {
+        tc->job->reduceKeys->push_back(it.first);
+    }
+    tc->job->barrier->barrier();
     return nullptr;
 }
 
 
 void frameworkReduce(ThreadContext *tc)
 {
-    jobContext *job = tc->job;
-    unsigned long len = job->reduceKeys->size();
-    unsigned long oldValue = (*(job->reduce_sync_counter))++;
-    while(oldValue < len)
     {
-        K2* key = job->reduceKeys->at(oldValue);
-        std::vector<V2*> value =  job->intermediateMap->at(key);
-        job->client->reduce(key, value, tc);
-        oldValue = (*(job->reduce_sync_counter))++;
+        jobContext *job = tc->job;
+        unsigned long len = job->reduceKeys->size();
+        unsigned long oldValue = (*(job->reduce_sync_counter))++;
+        while(oldValue < len)
+        {
+            K2* key = job->reduceKeys->at(oldValue);
+            auto map = *(job->intermediateMap);
+            mapVec value =  map[key];
+            job->client->reduce(key, value, tc);
+            (*(job->reducing_amount))++;
+            oldValue = (*(job->reduce_sync_counter))++;
+        }
     }
 }
 
 void *threadWork(void *arg)
 {
     auto * threadContext = (ThreadContext *)arg;
-    if(threadContext->threadID == 1)
-    {
-            frameworkShuffle(threadContext);
-    }
-    else
-    {
-            frameworkMap(threadContext);
-
-    }
+    frameworkMap(threadContext);
     threadContext->job->barrier->barrier();
     //STOP TILL THE SHUFFLE FINISH
 
@@ -175,6 +193,7 @@ JobHandle startMapReduceJob(const MapReduceClient& client,
     auto *map_sync_counter = new std::atomic<unsigned long>(0);
     auto *reduce_sync_counter = new std::atomic<unsigned long>(0);
     auto *atomic_mapping_counter = new std::atomic<unsigned long>(0);
+    auto *reducing_amount= new std::atomic<unsigned long>(0);
     currJobContext->inputVec = &inputVec;
     currJobContext->outputVec = &outputVec;
     currJobContext->contexts = new ThreadContext[multiThreadLevel];
@@ -189,6 +208,7 @@ JobHandle startMapReduceJob(const MapReduceClient& client,
     currJobContext->map_sync_counter = map_sync_counter;
     currJobContext->mapping_amount = atomic_mapping_counter;
     currJobContext->reduce_sync_counter = reduce_sync_counter;
+    currJobContext->reducing_amount = reducing_amount;
     for (int i = 0; i < multiThreadLevel; i++) {
         currJobContext->contexts[i] = {i,UNDEFINED_STAGE,currJobContext};
         for (int j = 0; j < multiThreadLevel; j++){
@@ -197,10 +217,13 @@ JobHandle startMapReduceJob(const MapReduceClient& client,
 
         }
     }
-    for (int i = 0; i < multiThreadLevel; i++) {
+    for (int i = 0; i < multiThreadLevel - 1; ++i) {
         pthread_create(currJobContext->threads + i, nullptr, threadWork,
                        currJobContext->contexts + i);
     }
+    pthread_create(currJobContext->threads + multiThreadLevel - 1, nullptr,frameworkShuffle,
+                   currJobContext->contexts + multiThreadLevel - 1);
+
     return  currJobContext;
 }
 
@@ -208,9 +231,8 @@ JobHandle startMapReduceJob(const MapReduceClient& client,
 void emit2(K2 *key, V2 *value, void *context)
 {
     auto * tc = (ThreadContext*) context;
-    mutexLockWithErrors(tc->job->intermediateMutexes.at(tc->threadID));
     tc->job->allIntermediateVec[tc->threadID].push_back({key,value});
-    mutexUnlockWithErrors(tc->job->intermediateMutexes.at(tc->threadID));
+
 }
 
 void emit3 (K3* key, V3* value, void* context){
@@ -228,22 +250,22 @@ void getJobState(JobHandle job, JobState* state){
 }
 
 void closeJobHandle(JobHandle job){
-//    auto * jc = (jobContext*) job;
-//    for(int i=0; i<jc->numOfThreads; ++i)
-//    {
-//        if (pthread_join(jc->threads[i], nullptr) !=0){ //merges threads
-//            exit(1);
-//        }
-//    }
+    auto * jc = (jobContext*) job;
+    for(int i=0; i<jc->numOfThreads; i++)
+    {
+        if (pthread_join(jc->threads[i], nullptr) !=0){ //merges threads
+            exit(1);
+        }
+    }
 //    delete[] jc->threads;
-//    for(int i=0; i<jc->numOfThreads; ++i)
-//    {
-//        delete jc->contexts[i].allIntermediateVec[i];
-//    }
+////    for(int i=0; i<jc->numOfThreads; ++i)
+////    {
+////        delete jc->contexts[i]->job->allIntermediateVec[i];
+////    }
 //    delete[] jc->allIntermediateVec;
-//    delete jc->contexts[0].barrier;
-//    delete jc->contexts[0].atomic_counter;
-//    delete jc->contexts[0].atomic_mapping_counter;
+////    delete jc->contexts[0].barrier;
+////    delete jc->contexts[0].atomic_counter;
+////    delete jc->contexts[0].atomic_mapping_counter;
 //    delete[] jc->contexts;
 //    delete jc;
 }

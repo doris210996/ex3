@@ -105,7 +105,8 @@ int main(int argc, char** argv)
 
     JobHandle job = startMapReduceJob(client, inputVec, outputVec, 3);
 
-    getJobState(job, &state);
+
+//    getJobState(job, &state);
 
 //    while (state.stage != REDUCE_STAGE || state.percentage != 100.0)
 //    {
