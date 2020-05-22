@@ -75,7 +75,6 @@ void* frameworkShuffle(void *arg)
 {
     auto *tc= (ThreadContext *)arg;
     jobContext *job = tc->job;
-    auto map = *(job->intermediateMap);
     unsigned long inputVectorLength = job->inputVec->size();
     //while we didn't mapping all the inputs
     while ((*(job->mapping_amount)) < inputVectorLength){
@@ -95,17 +94,17 @@ void* frameworkShuffle(void *arg)
                 IntermediatePair pair = curVec.back();
 
 
-                if (map.find(pair.first) == map.end())
+                if (job->intermediateMap->find(pair.first) == job->intermediateMap->end())
                 {
 //                    std::vector<V2 *> vec{pair.second};
                     mapVec* toAdd = new mapVec;
                     toAdd->push_back(pair.second);
-                    map.insert({pair.first, *(toAdd)});
+                    job->intermediateMap->insert({pair.first, *(toAdd)});
 
                 }
                 else
                 {
-                    map[pair.first].push_back(pair.second);
+                    job->intermediateMap->at(pair.first).push_back(pair.second);
 
 
                 }
@@ -125,22 +124,22 @@ void* frameworkShuffle(void *arg)
         auto curVec = job->allIntermediateVec[i];
         while (!curVec.empty()){
             IntermediatePair pair = curVec.back();
-            if (map.find(pair.first) == map.end())
+            if (job->intermediateMap->find(pair.first) == job->intermediateMap->end())
             {
 //                std::vector<V2 *> vec{pair.second};
                 mapVec* toAdd = new mapVec;
                 toAdd->push_back(pair.second);
-                map.insert({pair.first, *toAdd});
+                job->intermediateMap->insert({pair.first, *toAdd});
             }
             else
             {
-                map[pair.first].push_back(pair.second);
+                job->intermediateMap->at(pair.first).push_back(pair.second);
             }
             curVec.pop_back();
         }
     }
 
-    for(auto & it : map)
+    for(auto & it : *(job->intermediateMap))
     {
         tc->job->reduceKeys->push_back(it.first);
     }
